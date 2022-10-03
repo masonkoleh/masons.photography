@@ -1,0 +1,19 @@
+{
+	"name": "Team Camp",
+	"organization": "Calvin University",
+	"date": "2022-08-19T16:30:00.000Z",
+	"location": {
+		"name": "Cranhill Ranch",
+		"latitude": 43.71968581665037,
+		"longitude": -85.37313857569691
+	},
+	"images": [
+		"IMG_7033.jpg",
+		"IMG_7084.jpg",
+		"IMG_7070.jpg",
+		"IMG_7069.jpg",
+		"IMG_7039.jpg",
+		"IMG_7101.jpg",
+		"IMG_7103.jpg"
+	]
+}

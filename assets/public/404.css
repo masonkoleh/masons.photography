@@ -1,0 +1,36 @@
+body {
+	margin: 0pt;
+	box-sizing: border-box;
+}
+
+div.content {
+	display: flex;
+	position: absolute;
+	width: 80vw;
+	padding: 4vh 4vw;
+
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+	flex-wrap: wrap;
+	
+	background: rgba(0, 0, 0, 1);
+	color: rgba(255, 255, 255, 1);
+}
+
+span.header {
+	display: block;
+	width: 100%;
+	padding: 0pt;
+	font-size: 22vw;
+	text-align: center;
+}
+
+span.description {
+	display: block;
+	width: 100%;
+	padding: 2vh 0pt;
+	font-size: 3vw;
+	text-align: center;
+}

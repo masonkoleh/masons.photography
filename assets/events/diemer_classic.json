@@ -1,0 +1,33 @@
+{
+	"name": "Diemer Classic",
+	"organization": "Calvin University",
+	"date": "2022-09-01T22:00:00.000Z",
+	"location": {
+		"name": "Gainey",
+		"latitude": 42.932348498029114,
+		"longitude": -85.57142836199321
+	},
+	"images": [
+		"IMG_7166.jpg",
+		"IMG_7184.jpg",
+		"IMG_7213.jpg",
+		"IMG_7230.jpg",
+		"IMG_7268.jpg",
+		"IMG_7279.jpg",
+		"IMG_7281.jpg",
+		"IMG_7289.jpg",
+		"IMG_7298.jpg",
+		"IMG_7322.jpg",
+		"IMG_7344.jpg",
+		"IMG_7351.jpg",
+		"IMG_7366.jpg",
+		"IMG_7380.jpg",
+		"IMG_7384.jpg",
+		"IMG_7385.jpg",
+		"IMG_7407.jpg",
+		"IMG_7414.jpg",
+		"IMG_7422.jpg",
+		"IMG_7433.jpg",
+		"IMG_7435.jpg"
+	]
+}

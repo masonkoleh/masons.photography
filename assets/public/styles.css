@@ -1,0 +1,136 @@
+body {
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+a {
+	color: initial;
+	text-decoration: none;
+}
+
+i { font-style: normal; }
+
+#container {
+	width: 94vw;
+	margin: 2vh auto;
+}
+
+.header {
+	display: flex;
+	width: 85vw;
+	margin: 3vh auto;
+	padding: 3vh 1vw;
+	flex-wrap: wrap;
+
+	background: rgba(0, 0, 0, 1);
+}
+
+.header a {
+	display: block;
+	height: auto;
+	margin: 0 auto;
+
+	font-size: 4vw;
+	color: rgba(255, 255, 255, 1);
+	text-align: center;
+}
+
+.header a:hover { text-decoration: underline rgba(255, 255, 255, 1); }
+
+.active {
+	color: rgba(0, 0, 0, 1);
+	text-decoration: underline rgba(0, 0, 0, 1);
+	
+	background: rgba(255, 255, 255, 1);
+	outline: 7pt solid rgba(0, 0, 0, 1);
+	outline-offset: -7pt;
+}
+
+.active a { color: rgba(0, 0, 0, 1); }
+.active a:hover { text-decoration: underline rgba(0, 0, 0, 1); }
+
+.description {
+	width: 100%;
+	margin: 1.5vh 0pt 0pt 0pt;
+	color: rgba(255, 255, 255, 1);
+	text-align: center;
+}
+
+.gallery {
+	display: flex;
+	padding: 0pt;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	row-gap: 2vw;
+	list-style: none;
+}
+
+li {
+	position: relative;
+	cursor: pointer;
+	background: rgba(234, 234, 234, 1);
+	border: none;
+}
+
+img {
+	display: block;
+	width: 300px;
+	height: 200px;
+}
+
+.meets {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 1vw;
+	width: 92vw;
+	margin: 2vh auto;
+}
+
+.meets a {
+	display: inline-block;
+	padding: 0.75vw 2vw;
+
+	color: rgba(255, 255, 255, 1);
+	font-size: 12pt; 
+
+	background: rgba(0, 0, 0, 1);
+}
+
+.meets .active {
+	color: rgba(0, 0, 0, 1);
+	text-decoration: underline rgba(0, 0, 0, 1);
+	
+	background: rgba(255, 255, 255, 1);
+	outline: 3pt solid rgba(0, 0, 0, 1);
+	outline-offset: -3pt;
+}
+
+a:hover span { text-decoration: underline rgba(255, 255, 255, 1); }
+
+@media (max-width: 900px) {
+	div.header { margin: 3vh auto 1vh auto;}
+	div.header a { font-size: 20pt; }
+
+	span.description {
+		margin: 4pt 0pt 0pt 0pt;
+		font-size: 9pt;
+	}
+
+	div.meets { margin: 0pt auto; }
+	
+	ul.gallery li img {
+		display: block;
+		height: 20vh;
+		width: auto;
+	}
+
+	div.meets { margin: 6pt auto; }
+	div.meets a {
+		display: inline-block;
+		padding: 2vw 3.5vw;
+		font-size: 8pt;
+		outline: 2pt solid rgba(0, 0, 0, 1);
+		outline-offset: -2pt;
+	}
+}

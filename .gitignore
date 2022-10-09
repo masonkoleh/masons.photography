@@ -8,7 +8,7 @@
 
 # Node Files
 node_modules
-package*.json
+#package*.json
 
 # Docker Files
 #Dockerfile

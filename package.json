@@ -5,7 +5,7 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "mocha --reporter spec"
 	},
 	"keywords": [
 		"photography",
@@ -25,5 +25,9 @@
 		"lodash": "^4.17.21",
 		"path": "^0.12.7",
 		"sharp": "^0.31.1"
+	},
+	"devDependencies": {
+		"mocha": "^10.0.0",
+		"supertest": "^6.3.0"
 	}
 }

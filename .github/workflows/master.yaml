@@ -1,13 +1,13 @@
-name: Master - Testing
+name: Main - Testing
 
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   artifact:
-    name: Test master branch - GitHub Packages
+    name: Test main branch - GitHub Packages
     runs-on: ubuntu-22.04
 
     steps:

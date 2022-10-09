@@ -1,0 +1,21 @@
+name: Master - Testing
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  artifact:
+    name: Test master branch - GitHub Packages
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.17.1
+      - name: Maven Package
+        run: mvn -B clean package -DskipTests
+      - name: Maven Verify
+        run: mvn -B clean verify

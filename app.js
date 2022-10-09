@@ -17,7 +17,18 @@ const gen_sha1 = string => crypto.createHash('sha1')
 
 const app = express();
 app.use(compression());
-app.use(helmet());
+app.use(helmet({
+	contentSecurityPolicy: (process.env.NODE_ENV == 'production') ? {
+		directives: {
+			defaultSrc: ['*'],
+			imgSrc: ["'self'", '*', 'https:', 'data:', 'blob:'],
+			scriptSrc: ["'self'", "*", "data:", "'unsafe-eval'", "'unsafe-inline'", "blob:"],
+			mediaSrc: ["'self'", "*", 'https:', 'data:', 'blob:']
+		}
+	} : false,
+	crossOriginResourcePolicy: (process.env.NODE_ENV == 'production') ? undefined : false,
+	crossOriginEmbedderPolicy: (process.env.NODE_ENV == 'production') ? undefined : false
+}));
 
 app.get('/', (req, res) => {
 	let $ = cheerio.load(fs.readFileSync(path.join(process.cwd(), 'index.html')));
@@ -29,7 +40,7 @@ app.get('/', (req, res) => {
 
 	$('div.header').addClass('active');
 	for (let { name } of organizations)
-		$('div.meets').append(`<a href='https://masons.photography/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		$('div.meets:first').append(`<a href='https://masons.photography/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
 
 	for (let i = images.length - 1; i > 0; i--) {
 		let rgn = Math.floor(Math.random() * (i + 1));
@@ -86,7 +97,7 @@ app.get('/:organization', (req, res) => {
 		.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
 	for (let { name, images } of events) {
-		$('div.meets').append(`<a ${ (name.toLowerCase().replace(' ', '-') == req.params.event) ? "class='active'" : "" } href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		$('div.meets:first').append(`<a ${ (name.toLowerCase().replace(' ', '-') == req.params.event) ? "class='active'" : "" } href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
 		images.map(filename => { return { href: `https://masons.photography/${filename}`, src: `https://masons.photography/${filename.replace('jpg', 'webp')}` } })
 			.forEach((img, index) => {
 				$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : "" }></a></li>`);
@@ -113,7 +124,7 @@ app.get('/:organization/:event', (req, res) => {
 
 	for (let { name } of events)
 		if (name.toLowerCase().replace(' ', '-') == req.params.event) $('div.meets').append(`<a class='active' href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
-		else $('div.meets').append(`<a href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		else $('div.meets:first').append(`<a href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
 
 	$('div.header a').after(`<span class='description'>${location.name} &#183; <i class='date'>${date}</i></span>`);
 	

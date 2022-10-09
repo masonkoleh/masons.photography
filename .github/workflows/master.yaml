@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.17.1
-      - name: Maven Package
-        run: mvn -B clean package -DskipTests
-      - name: Maven Verify
-        run: mvn -B clean verify
+      - name: NPM Install Dependencies
+        run: npm install
+      - name: Test Node Environment
+        run: npm test

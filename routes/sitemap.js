@@ -25,7 +25,9 @@ router.get('/', (req, res) => {
 		modified: fs.statSync(path.join(process.cwd(), 'index.html'))['mtime'].toISOString()
 	}].concat(organizations, events);
 
-	let xml = builder.create('urlset', { version: '1.0', encoding: 'UTF-8' }, null, { noValidation: true });
+	let xml = builder.create('urlset', { version: '1.0', encoding: 'UTF-8' }, null, { noValidation: true })
+		.attribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+		
 	for (let { href, modified } of pages) {
 		let url = xml.element('url');
 		url.element('loc', href);

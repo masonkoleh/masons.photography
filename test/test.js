@@ -52,3 +52,13 @@ describe('Image CDN', () => {
 		});
 	});
 });
+
+describe('GET /sitemap.xml', () => {
+	it('responds with valid xml file', done => {
+		request(app)
+			.get('/sitemap.xml')
+			.set('Accept', 'text/xml, application/xml')
+			.expect('Content-Type', /xml/)
+			.expect(200, done)
+	});
+});

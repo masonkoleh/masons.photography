@@ -19,6 +19,8 @@ app.use(helmet({
 	crossOriginEmbedderPolicy: (process.env.NODE_ENV == 'production') ? undefined : false
 }));
 
+
+app.use(express.static(path.join(process.cwd(), 'assets/public')));	// Development Only
 app.use(require(path.join(process.cwd(), 'routes')));
 
 const httpserver = http.createServer(app).listen(process.env.PORT || 4000, () => console.log(`Running on port ${ process.env.PORT || 4000 }`));

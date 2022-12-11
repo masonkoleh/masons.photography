@@ -20,11 +20,12 @@ router.get('/', (req, res) => {
 		[images[i], images[rgn]] = [images[rgn], images[i]]; // Swap Array Values at Indexes i and rng
 	}
 
+	/*
 	images.map(filename => { return { href: `https://masons.photography/${filename}`, src: `https://masons.photography/${filename.replace('jpg', 'webp')}` } })
 		.forEach((img, index) => {
 			$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : "" }></a></li>`);
 		});
-		
+	*/
 	res.status(200).send($.html());
 });
 

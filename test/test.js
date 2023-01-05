@@ -1,4 +1,10 @@
-const assert = require('assert');
+/*
+	eslint no-undef: "warn"
+	--------
+	When using the supertest library, both describe and it are defined functions.
+*/
+
+//	const assert = require('assert');
 const request = require('supertest');
 const express = require('express');
 const path = require('path');
@@ -59,6 +65,18 @@ describe('GET /sitemap.xml', () => {
 			.get('/sitemap.xml')
 			.set('Accept', 'text/xml, application/xml')
 			.expect('Content-Type', /xml/)
-			.expect(200, done)
+			.expect(200, done);
+	});
+});
+
+describe('Metrics Endpoint', () => {
+	describe('GET /metrics', () => {
+		it('responds with valid xml file', done => {
+			request(app)
+				.get('/metrics')
+				//.set('Accept', 'text/xml, application/xml')
+				//.expect('Content-Type', /xml/)
+				.expect(200, done);
+		});
 	});
 });

@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
 		.filter(x => x.endsWith('.json'))
 		.map(x => { return {
 			href: `https://masons.photography/${x.split('.')[0].replace('_', '-')}/`,
-			modified: fs.statSync(path.join(process.cwd(), 'assets/organizations', x))['mtime'].toISOString()
-		}});
+			modified: fs.statSync(path.join(process.cwd(), 'assets/organizations', x)).mtime.toISOString()
+		};});
 
 	let events = fs.readdirSync(path.join(process.cwd(), 'assets/events'))
 		.filter(x => x.endsWith('.json'))
@@ -17,12 +17,12 @@ router.get('/', (req, res) => {
 		.filter(x => !x.href)
 		.map(x => { return {
 			href: `https://masons.photography/${x.organization.toLowerCase().replace(' ', '-')}/${x.name.toLowerCase().replace(' ', '-')}/`,
-			modified: fs.statSync(path.join(process.cwd(), 'assets/events', `${x.name.toLowerCase().replace(' ', '_')}.json`))['mtime'].toISOString()
-		}});
+			modified: fs.statSync(path.join(process.cwd(), 'assets/events', `${x.name.toLowerCase().replace(' ', '_')}.json`)).mtime.toISOString()
+		};});
 
 	let pages = [{
 		href: 'https://masons.photography/',
-		modified: fs.statSync(path.join(process.cwd(), 'index.html'))['mtime'].toISOString()
+		modified: fs.statSync(path.join(process.cwd(), 'index.html')).mtime.toISOString()
 	}].concat(organizations, events);
 
 	let xml = builder.create('urlset', { version: '1.0', encoding: 'UTF-8' }, null, { noValidation: true })

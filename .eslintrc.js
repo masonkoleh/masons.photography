@@ -12,5 +12,12 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+		"dot-location": ["error", "property"],
+		"semi": ["error", "always"],
+		"semi-style": ["error", "last"],
+		"no-extra-semi": ["error"],
+		"semi-spacing": ["error"],
+		"func-call-spacing": ["error", "never"],
+		"dot-notation": "error"
     }
-}
+};

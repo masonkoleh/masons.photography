@@ -5,11 +5,37 @@
 */
 
 //	const assert = require('assert');
-const request = require('supertest');
-const express = require('express');
-const path = require('path');
 
-const app = express();
+const app = require('express')();
+const compression = require('compression');
+const helmet = require('helmet');
+const path = require('path');
+const prom_bundle = require('express-prom-bundle');
+const request = require('supertest');
+
+app.use(prom_bundle({
+	includeMethod: true,
+	includePath: true,
+	includeStatusCode: true,
+	includeUp: true,
+	customLabels: { project_name: 'masons.photography', project_type: 'website' },
+	promClient: { collectDefaultMetrics: {} }
+}));
+
+app.use(compression());
+app.use(helmet({
+	contentSecurityPolicy: (process.env.NODE_ENV == 'production') ? {
+		directives: {
+			defaultSrc: ['*'],
+			imgSrc: ["'self'", '*', 'https:', 'data:', 'blob:'],
+			scriptSrc: ["'self'", "*", "data:", "'unsafe-eval'", "'unsafe-inline'", "blob:"],
+			mediaSrc: ["'self'", "*", 'https:', 'data:', 'blob:']
+		}
+	} : false,
+	crossOriginResourcePolicy: (process.env.NODE_ENV == 'production') ? undefined : false,
+	crossOriginEmbedderPolicy: (process.env.NODE_ENV == 'production') ? undefined : false
+}));
+
 app.use(require(path.join(process.cwd(), 'routes')));
 
 // describe('', () => {});
@@ -71,11 +97,11 @@ describe('GET /sitemap.xml', () => {
 
 describe('Metrics Endpoint', () => {
 	describe('GET /metrics', () => {
-		it('responds with valid xml file', done => {
+		it('responds with valid text file', done => {
 			request(app)
 				.get('/metrics')
-				//.set('Accept', 'text/xml, application/xml')
-				//.expect('Content-Type', /xml/)
+				.set('Accept', 'text/plain, text/html, application/json')
+				.expect('Content-Type', /plain/)
 				.expect(200, done);
 		});
 	});

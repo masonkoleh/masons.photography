@@ -1,30 +1,9 @@
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
-const prometheus = require('prom-client');
 const router = require('express').Router();
 
-prometheus.collectDefaultMetrics();
-
-// const http_req_ms = new prometheus.Histogram({
-// 	name: 'http_request_duration_ms',
-// 	help: 'Duration of HTTP requests in ms',
-// 	labelNames: ['route'],
-// 	buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500]
-// });
-/*
-router.use((req, res) => {
-	res.locals.startEpoch = Date.now();
-});
-*/
-router.get('/metrics', (req, res) => {
-	//prometheus.register.metrics().then(str => console.log(str));
-	res.set('Content-Type', prometheus.register.contentType);
-	res.send(prometheus.register.metrics());
-});
-
 router.get('/', (req, res) => {
-	//res.locals.startEpoch = Date.now();
 	let $ = cheerio.load(fs.readFileSync(path.join(process.cwd(), 'index.html')));
 
 	let { images } = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'assets/main.json')));
@@ -47,9 +26,6 @@ router.get('/', (req, res) => {
 		});
 		
 	res.status(200).send($.html());
-	// const ms = Date.now() - res.locals.startEpoch;
-	// http_req_ms.labels(req.method, req.route.path, res.statusCode)
-	// 	.observe(ms);
 });
 
 router.get('/:organization', (req, res) => {
@@ -101,11 +77,5 @@ router.get('/:organization/:event', (req, res) => {
 
 	res.status(200).send($.html());
 });
-/*
-router.use((req, res) => {
-	const ms = Date.now() - res.locals.startEpoch;
-	http_req_ms.labels(req.method, req.route.path, res.statusCode)
-		.observe(ms);
-});
-*/
+
 module.exports = router;

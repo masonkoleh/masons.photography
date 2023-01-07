@@ -1,10 +1,19 @@
 const compression = require('compression');
-const express = require('express');
+const app = require('express')();
 const helmet = require('helmet');
 const http = require('http');
 const path = require('path');
+const prom_bundle = require('express-prom-bundle');
 
-const app = express();
+app.use(prom_bundle({
+	includeMethod: true,
+	includePath: true,
+	includeStatusCode: true,
+	includeUp: true,
+	customLabels: { project_name: 'masons.photography', project_type: 'website' },
+	promClient: { collectDefaultMetrics: {} }
+}));
+
 app.use(compression());
 app.use(helmet({
 	contentSecurityPolicy: (process.env.NODE_ENV == 'production') ? {

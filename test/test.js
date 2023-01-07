@@ -19,6 +19,14 @@ app.use(prom_bundle({
 	includeStatusCode: true,
 	includeUp: true,
 	customLabels: { project_name: 'masons.photography', project_type: 'website' },
+	normalizePath: [
+		['/IMG_\\d+\\.webp', '/IMG_####.webp'],
+		['/IMG_\\d+\\.jpg', '/IMG_####.jpg']
+	],
+	urlValueParser: {
+		minHexLength: 1,
+		extraMasks: [ 'IMG_\\d+\\.webp', 'IMG_\\d+\\.jpg' ]
+	},
 	promClient: { collectDefaultMetrics: {} }
 }));
 

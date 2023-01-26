@@ -46,7 +46,6 @@ app.use(helmet({
 
 app.use(require(path.join(process.cwd(), 'routes')));
 
-// describe('', () => {});
 describe('Image CDN', () => {
 	describe('GET /*.jpg', () => {
 		describe('valid file', () => {

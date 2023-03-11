@@ -7,7 +7,7 @@ on:
 
 jobs:
   artifact:
-    name: Test main branch - GitHub Packages
+    name: Test Main Branch
     runs-on: ubuntu-22.04
 
     steps:

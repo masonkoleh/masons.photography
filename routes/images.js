@@ -7,8 +7,8 @@ const sharp = require('sharp');
 
 const image_height = 250;
 const gen_sha1 = string => crypto.createHash('sha1')
-		.update(string)
-		.digest('hex');
+	.update(string)
+	.digest('hex');
 
 router.get(/((IMG_\d+)\.(webp|jpg))/, async (req, res) => {
 	const { 0: image, 1: file_name, 2: file_type } = req.params;

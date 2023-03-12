@@ -13,16 +13,16 @@ router.get('/', (req, res) => {
 
 	$('div.header').addClass('active');
 	for (let { name } of organizations)
-		$('div.meets:first').append(`<a href='https://masons.photography/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		$('div.meets:first').append(`<a href='/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
 
 	for (let i = images.length - 1; i > 0; i--) {
 		let rgn = Math.floor(Math.random() * (i + 1));
 		[images[i], images[rgn]] = [images[rgn], images[i]]; // Swap Array Values at Indexes i and rng
 	}
 
-	images.map(filename => { return { href: `https://masons.photography/${filename}`, src: `https://masons.photography/${filename.replace('jpg', 'webp')}` }; })
+	images.map(filename => { return { href: `/${filename}`, src: `/${filename.replace('jpg', 'webp')}` }; })
 		.forEach((img, index) => {
-			$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : "" }></a></li>`);
+			$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : '' }></a></li>`);
 		});
 		
 	res.status(200).send($.html());
@@ -40,10 +40,10 @@ router.get('/:organization', (req, res) => {
 		.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
 	for (let { name, images } of events) {
-		$('div.meets:first').append(`<a ${ (name.toLowerCase().replace(' ', '-') == req.params.event) ? "class='active'" : "" } href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
-		images.map(filename => { return { href: `https://masons.photography/${filename}`, src: `https://masons.photography/${filename.replace('jpg', 'webp')}` }; })
+		$('div.meets:first').append(`<a ${ (name.toLowerCase().replace(' ', '-') == req.params.event) ? "class='active'" : "" } href='/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		images.map(filename => { return { href: `/${filename}`, src: `/${filename.replace('jpg', 'webp')}` }; })
 			.forEach((img, index) => {
-				$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : "" }></a></li>`);
+				$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : '' }></a></li>`);
 			});
 	}
 	
@@ -65,14 +65,14 @@ router.get('/:organization/:event', (req, res) => {
 		.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
 	for (let { name } of events)
-		if (name.toLowerCase().replace(' ', '-') == req.params.event) $('div.meets').append(`<a class='active' href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
-		else $('div.meets:first').append(`<a href='https://masons.photography/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		if (name.toLowerCase().replace(' ', '-') == req.params.event) $('div.meets').append(`<a class='active' href='/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
+		else $('div.meets:first').append(`<a href='/${req.params.organization}/${name.toLowerCase().replace(' ', '-')}'><span>${name}</span></a>`);
 
 	$('div.header a').after(`<span class='description'>${location.name} &#183; <i class='date'>${date}</i></span>`);
 	
-	images.map(filename => { return { href: `https://masons.photography/${filename}`, src: `https://masons.photography/${filename.replace('jpg', 'webp')}` }; })
-	.forEach((img, index) => {
-			$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : "" }></a></li>`);
+	images.map(filename => { return { href: `/${filename}`, src: `/${filename.replace('jpg', 'webp')}` }; })
+		.forEach((img, index) => {
+			$('div#container ul').append(`<li><a href='${img.href}' target='_blank' title='Click for Full Quality'><img class='image' src='${img.src}' ${ index > 7 ? "loading='lazy'" : '' }></a></li>`);
 		});
 
 	res.status(200).send($.html());

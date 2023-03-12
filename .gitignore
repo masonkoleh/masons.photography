@@ -1,5 +1,4 @@
 # Media Files
-#*.jpg
 *.mov
 
 # Weird Mac Files
@@ -8,8 +7,6 @@
 
 # Node Files
 node_modules
-#package*.json
 
-# Docker Files
-#Dockerfile
-#.dockerignore
+# ES Lint
+.eslintrc.js

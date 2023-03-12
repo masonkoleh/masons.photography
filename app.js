@@ -22,9 +22,6 @@ app.use(prom_bundle({
 	promClient: { collectDefaultMetrics: {} }
 }));
 
-
-
-app.use(compression());
 app.use(helmet({
 	contentSecurityPolicy: (process.env.NODE_ENV == 'production') ? {
 		directives: {
@@ -38,6 +35,7 @@ app.use(helmet({
 	crossOriginEmbedderPolicy: (process.env.NODE_ENV == 'production') ? undefined : false
 }));
 
+app.use(compression());
 app.use(require(path.join(process.cwd(), 'routes')));
 
 http.createServer(app).listen(process.env.PORT || 80, () => console.log(`Running on port ${ process.env.PORT || 80 }`));
